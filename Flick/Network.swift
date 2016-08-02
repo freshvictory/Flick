@@ -24,7 +24,7 @@ class Network {
             dispatch_async(dispatch_get_main_queue()) {
                 do {
                     json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? Payload
-                    print(json)
+//                    print(json)
                 } catch {
                     print(error)
                 }
@@ -43,5 +43,25 @@ class Network {
         }
         
         dataTask.resume()
+    }
+    
+    static func requestData(urlString: String, callback: (data: Payload) -> Void) {
+        guard let url = NSURL(string: urlString) else {
+            return
+        }
+        let request = NSURLRequest(URL: url)
+        requestData(request, callback: callback)
+    }
+    
+    static func apiRequest(urlString: String, callback: (data: Payload) -> Void) {
+        let authURLString = Authentication.authURL + urlString
+        guard let url = NSURL(string: authURLString), let token = Authentication.token else {
+            print("No auth token or bad api url.")
+            return
+        }
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("bearer \(token)", forHTTPHeaderField: "Authorization")
+        print(request)
+        requestData(request, callback: callback)
     }
 }

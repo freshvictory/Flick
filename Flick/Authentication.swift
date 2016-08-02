@@ -14,6 +14,8 @@ class Authentication {
     /// Flick's reddit Client ID
     static var clientID: String = "4z9lGA0CVOIG6g"
     
+    static var authURL: String = "https://oauth.reddit.com/"
+    
     static var loggedIn: Bool = false
     
     static var user: User?
@@ -48,7 +50,7 @@ class Authentication {
     
     private static func assignTokenNoUser(json: Payload) {
         token = json["access_token"] as? String
-        print(token)
+        print(token!)
     }
     
     private static func generateRequestNoUser() -> NSMutableURLRequest {

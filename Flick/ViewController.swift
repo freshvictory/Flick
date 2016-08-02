@@ -9,15 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var sr: Subreddit?
+    var u: User?
+    var p: Page?
+    
     @IBAction func logIn(sender: UIButton) {
-        Authentication.login(false)
-        responseText.text = Authentication.responseText
+        sr = Subreddit(name: "news")
+        u = User(username: "freshvictory")
+        p = Page(subreddit: sr!)
+        
+    }
+    @IBAction func refresh(sender: UIButton) {
+        responseText.text = p?.posts.first?.title
     }
     @IBOutlet weak var responseText: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        Authentication.login(false)
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D0774DE51D5034D500D3520B /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0774DE41D5034D500D3520B /* Page.swift */; };
 		D07BF9541D48285400C55387 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07BF9531D48285400C55387 /* AppDelegate.swift */; };
 		D07BF9561D48285400C55387 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07BF9551D48285400C55387 /* ViewController.swift */; };
 		D07BF9591D48285400C55387 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D07BF9571D48285400C55387 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0774DE41D5034D500D3520B /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D07BF9501D48285400C55387 /* Flick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07BF9531D48285400C55387 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D07BF9551D48285400C55387 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				D0914E1E1D4EC19900E1BEED /* User.swift */,
 				D0914E201D4EC36300E1BEED /* Post.swift */,
 				D0914E221D4EC4CD00E1BEED /* Subreddit.swift */,
+				D0774DE41D5034D500D3520B /* Page.swift */,
 				D0914E241D4ED4BA00E1BEED /* RedditLookup.swift */,
 				D0914E261D4ED86600E1BEED /* Authentication.swift */,
 				D0914E281D4EEAC700E1BEED /* Network.swift */,
@@ -161,6 +164,7 @@
 				D0914E1F1D4EC19900E1BEED /* User.swift in Sources */,
 				D07BF9561D48285400C55387 /* ViewController.swift in Sources */,
 				D07BF9541D48285400C55387 /* AppDelegate.swift in Sources */,
+				D0774DE51D5034D500D3520B /* Page.swift in Sources */,
 				D07BF95C1D48285400C55387 /* Flick.xcdatamodeld in Sources */,
 				D0914E291D4EEAC700E1BEED /* Network.swift in Sources */,
 				D0914E231D4EC4CD00E1BEED /* Subreddit.swift in Sources */,
