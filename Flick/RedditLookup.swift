@@ -19,6 +19,6 @@ class RedditLookup {
     }
     
     static func posts(subreddit: Subreddit, page: Int, callback: (data: Payload) -> Void) {
-        Network.apiRequest("r/\(subreddit.name)/", callback: callback)
+        Network.apiRequest(subreddit == Subreddit.Front ? "" : "r/\(subreddit.name)/", callback: callback)
     }
 }

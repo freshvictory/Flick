@@ -13,8 +13,8 @@ class Post {
     /// The title of the `Post`
     var title: String
     
-    /// The `User` who submitted the `Post`
-    var author: User
+    /// The username of the user who submitted the `Post`
+    var author: String
     
     /// The score of the `Post`
     var score: Int
@@ -22,8 +22,8 @@ class Post {
     /// How many comments the `Post` has
     var numComments: Int
     
-    /// The `Subreddit` this `Post` was submitted to
-    var subreddit: Subreddit
+    /// The subreddit this `Post` was submitted to
+    var subreddit: String
     
     /// How many times this `Post` has been gilded
     var gilded: Int
@@ -58,7 +58,7 @@ class Post {
     /// The time this `Post` was created
     var dateCreated: NSDate
     
-    init(title: String, author: User, score: Int, numComments: Int, subreddit: Subreddit, gilded: Int, archived: Bool, clicked: Bool, over18: Bool, hideScore: Bool, hidden: Bool, edited: Bool, saved: Bool, stickied: Bool, permaLink: String, dateCreated: NSDate) {
+    init(title: String, author: String, score: Int, numComments: Int, subreddit: String, gilded: Int, archived: Bool, clicked: Bool, over18: Bool, hideScore: Bool, hidden: Bool, edited: Bool, saved: Bool, stickied: Bool, permaLink: String, dateCreated: NSDate) {
         self.title = title
         self.author = author
         self.score = score
@@ -81,10 +81,10 @@ class Post {
         guard let t = postdata["title"] as? String, let op = postdata["author"] as? String, let votes = postdata["score"] as? Int, let comments = postdata["num_comments"] as? Int, let subredditName = postdata["subreddit"] as? String, let g = postdata["gilded"] as? Int, let arch = postdata["archived"] as? Bool, let cl = postdata["clicked"] as? Bool, let o18 = postdata["over_18"] as? Bool, let hS = postdata["hide_score"] as? Bool, let hide = postdata["hidden"] as? Bool, let ed = postdata["edited"] as? Bool, let st = postdata["stickied"] as? Bool, let pLink = postdata["permalink"] as? String, let s = postdata["saved"] as? Bool
             else {
                 print("building post failed")
-                self.init(title: "", author: User(username: "", linkKarma: 0, commentKarma: 0), score: 0, numComments: 0, subreddit: Subreddit(name: ""), gilded: 0, archived: false, clicked: false, over18: false, hideScore: false, hidden: false, edited: false, saved: false, stickied: false, permaLink: "", dateCreated: NSDate.distantFuture())
+                self.init(title: "", author: "", score: 0, numComments: 0, subreddit: "", gilded: 0, archived: false, clicked: false, over18: false, hideScore: false, hidden: false, edited: false, saved: false, stickied: false, permaLink: "", dateCreated: NSDate.distantFuture())
                 return
         }
         
-        self.init(title: t, author: User(username: op), score: votes, numComments: comments, subreddit: Subreddit(name: subredditName), gilded: g, archived: arch, clicked: cl, over18: o18, hideScore: hS, hidden: hide, edited: ed, saved: s, stickied: st, permaLink: pLink, dateCreated: NSDate.distantFuture())
+        self.init(title: t, author: op, score: votes, numComments: comments, subreddit: subredditName, gilded: g, archived: arch, clicked: cl, over18: o18, hideScore: hS, hidden: hide, edited: ed, saved: s, stickied: st, permaLink: pLink, dateCreated: NSDate.distantFuture())
     }
 }

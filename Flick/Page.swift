@@ -14,6 +14,8 @@ class Page {
     
     var subreddit: Subreddit?
     
+    static var Front: Page = Page(subreddit: Subreddit.Front)
+    
     init(subreddit: Subreddit) {
         self.subreddit = subreddit
         RedditLookup.posts(subreddit, page: 0, callback: updateFromJSON)

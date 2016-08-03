@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Subreddit {
+class Subreddit: Equatable {
     var name: String
     var title: String
     var description: String
@@ -16,6 +16,10 @@ class Subreddit {
     var ID: String
     var numSubscribers: Int
     var over18: Bool
+    
+    static var Front: Subreddit = Subreddit(name: "", title: "front page", description: "", publicDescription: "", ID: "", numSubscribers: 0, over18: true)
+    
+    var loading: Bool = false
     
     init(name: String, title: String, description: String, publicDescription: String, ID: String, numSubscribers: Int, over18: Bool) {
         self.name = name
@@ -29,6 +33,11 @@ class Subreddit {
     
     convenience init(name: String) {
         self.init(name: name, title: "", description: "", publicDescription: "", ID: "", numSubscribers: 0, over18: false)
+        Refresh()
+    }
+    
+    func Refresh() {
+        loading = true
         RedditLookup.subreddit(name, callback: self.updateFromJSON)
     }
     
@@ -44,5 +53,11 @@ class Subreddit {
         ID = id
         numSubscribers = numSub
         over18 = over == 1
+        
+        loading = false
     }
+}
+
+func ==(lhs: Subreddit, rhs: Subreddit) -> Bool {
+    return lhs.name == rhs.name
 }
