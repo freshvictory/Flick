@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="C2a-2F-ALq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5h1-8l-stT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfY-Q7-OYL">
-                                <rect key="frame" x="20" y="291" width="560" height="289"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nG0-R9-GC3">
                                 <rect key="frame" x="190" y="253" width="53" height="30"/>
                                 <state key="normal" title="Refresh"/>
@@ -30,48 +25,146 @@
                                     <action selector="refresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mbr-91-eOd"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Zl-Jq-kW8">
+                                <rect key="frame" x="252" y="7" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="112" y="117" width="97" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yEP-3q-Ogc">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="log in"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="269" y="169" width="46" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EcQ-fC-QNi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="2Zl-Jq-kW8"/>
+                                <exclude reference="yEP-3q-Ogc"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="2Zl-Jq-kW8"/>
+                                <include reference="yEP-3q-Ogc"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="uBh-hy-nVw">
                         <nil key="title"/>
-                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="2Zl-Jq-kW8">
-                            <rect key="frame" x="252" y="7" width="97" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <barButtonItem key="rightBarButtonItem" title="log in" id="0Zh-BN-rOQ">
-                            <connections>
-                                <action selector="login:" destination="BYZ-38-t0r" id="0LW-EC-Nr1"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="responseText" destination="IfY-Q7-OYL" id="bUk-Vc-Qe8"/>
-                    </connections>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1293" y="348"/>
+            <point key="canvasLocation" x="939" y="273.75"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hWV-h2-KFI">
+        <!--Page View Controller-->
+        <scene sceneID="BM0-id-dWV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="C2a-2F-ALq" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z6f-lk-Ocn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="b4d-FJ-b9J"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LtW-GX-803" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="5h1-8l-stT" customClass="PageViewController" customModule="Flick" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="NKa-QF-8AZ"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lFn-kN-mVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="375" y="348"/>
+            <point key="canvasLocation" x="-439.5" y="143.25"/>
+        </scene>
+        <!--RedditView-->
+        <scene sceneID="XIn-K8-SFU">
+            <objects>
+                <viewController storyboardIdentifier="redditViewController" id="MM7-wA-lRD" userLabel="RedditView" customClass="RedditViewController" customModule="Flick" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cs0-Ly-4hp"/>
+                        <viewControllerLayoutGuide type="bottom" id="gZe-Rf-Rjo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="adW-AJ-gzB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SThomas.small.99.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-9Q-UYI">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Kzp-c9-DgU" appends="YES" id="eXS-av-YVq"/>
+                                </connections>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mcu-8g-FDA">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zhh-9Q-UYI" firstAttribute="height" secondItem="adW-AJ-gzB" secondAttribute="height" multiplier="0.5" id="BQJ-xc-3kL"/>
+                            <constraint firstItem="Zhh-9Q-UYI" firstAttribute="centerX" secondItem="adW-AJ-gzB" secondAttribute="centerX" id="Dru-i4-JoB"/>
+                            <constraint firstItem="Zhh-9Q-UYI" firstAttribute="width" secondItem="adW-AJ-gzB" secondAttribute="width" id="Dwd-iN-gQ1"/>
+                            <constraint firstItem="Mcu-8g-FDA" firstAttribute="width" secondItem="adW-AJ-gzB" secondAttribute="width" id="Y0d-dC-aPW"/>
+                            <constraint firstItem="gZe-Rf-Rjo" firstAttribute="top" secondItem="Mcu-8g-FDA" secondAttribute="bottom" id="bef-m5-gH6"/>
+                            <constraint firstItem="Mcu-8g-FDA" firstAttribute="height" secondItem="adW-AJ-gzB" secondAttribute="height" multiplier="1:2" id="cMw-cE-IKc"/>
+                            <constraint firstItem="Mcu-8g-FDA" firstAttribute="centerX" secondItem="adW-AJ-gzB" secondAttribute="centerX" id="l0L-Eo-uF6"/>
+                            <constraint firstItem="Zhh-9Q-UYI" firstAttribute="top" secondItem="Cs0-Ly-4hp" secondAttribute="bottom" id="xV8-ge-0Wt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Zhh-9Q-UYI"/>
+                                <exclude reference="Mcu-8g-FDA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Y0d-dC-aPW"/>
+                                <exclude reference="cMw-cE-IKc"/>
+                                <exclude reference="l0L-Eo-uF6"/>
+                                <exclude reference="BQJ-xc-3kL"/>
+                                <exclude reference="Dru-i4-JoB"/>
+                                <exclude reference="Dwd-iN-gQ1"/>
+                                <exclude reference="xV8-ge-0Wt"/>
+                                <exclude reference="bef-m5-gH6"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Zhh-9Q-UYI"/>
+                                <include reference="Mcu-8g-FDA"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Y0d-dC-aPW"/>
+                                <include reference="cMw-cE-IKc"/>
+                                <include reference="l0L-Eo-uF6"/>
+                                <include reference="BQJ-xc-3kL"/>
+                                <include reference="Dru-i4-JoB"/>
+                                <include reference="Dwd-iN-gQ1"/>
+                                <include reference="xV8-ge-0Wt"/>
+                                <include reference="bef-m5-gH6"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="panRec" destination="Kzp-c9-DgU" id="i6m-sl-Kat"/>
+                        <outlet property="responseText" destination="Mcu-8g-FDA" id="cun-r1-mOI"/>
+                        <outlet property="topImageView" destination="Zhh-9Q-UYI" id="yyA-fO-uz8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LdA-mh-oyb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Kzp-c9-DgU"/>
+            </objects>
+            <point key="canvasLocation" x="238.5" y="273.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SThomas.small.99.jpg" width="484" height="704"/>
+    </resources>
 </document>

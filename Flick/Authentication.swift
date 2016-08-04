@@ -58,7 +58,7 @@ class Authentication {
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        print(request)
+        print("Request made to \(request.URL!)")
         Network.requestData(request, callback: getToken)
     }
     
