@@ -16,7 +16,7 @@ class RedditObject: Equatable {
         loading = true
     }
     
-    func updateFromJSON(data: Payload) {
+    func updateFromJSON(_ data: Payload) {
         loading = false
     }
 }

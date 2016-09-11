@@ -17,13 +17,13 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     
     var svc: SFSafariViewController?
     
-    @IBAction func login(sender: UIBarButtonItem) {
-        svc = SFSafariViewController(URL: Authentication.getLoginUrl())
+    @IBAction func login(_ sender: UIBarButtonItem) {
+        svc = SFSafariViewController(url: Authentication.getLoginUrl() as URL)
         svc!.delegate = self
-        self.presentViewController(svc!, animated: true, completion: nil)
+        self.present(svc!, animated: true, completion: nil)
     }
     
-    @IBAction func refresh(sender: UIButton) {
+    @IBAction func refresh(_ sender: UIButton) {
         responseText.text = Page.Front.posts.first?.title
     }
     
@@ -33,11 +33,11 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         Authentication.loginNoUser()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.safariLogin(_:)), name: "userLoggedIn", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.safariLogin(_:)), name: "userLoggedIn" as NSNotification.Name, object: nil)
     }
     
-    func safariLogin(notification: NSNotification) {
-        self.svc!.dismissViewControllerAnimated(true, completion: nil)
+    func safariLogin(_ notification: Notification) {
+        self.svc!.dismiss(animated: true, completion: nil)
         refreshDisplay()
     }
     
@@ -51,8 +51,8 @@ class ViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     // MARK: SFSafariViewControllerDelegate
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

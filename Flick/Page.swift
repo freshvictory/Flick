@@ -21,7 +21,7 @@ class Page {
         RedditLookup.posts(subreddit, page: 0, callback: updateFromJSON)
     }
     
-    private func updateFromJSON(data: Payload) {
+    private func updateFromJSON(_ data: Payload) {
         guard let all = data["data"] as? Payload, let children = all["children"] as? [Payload] else {
             return
         }
