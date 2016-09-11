@@ -28,18 +28,18 @@ class Authentication {
     
     static var responseText: String = "Something went wrong"
     
-    static var deviceID = NSUUID().UUIDString
+    static var deviceID = UUID().uuidString
     
     static var currentUser: User?
     
-    static func getLoginUrl(withUser: Bool = true) -> NSURL {
+    static func getLoginUrl(_ withUser: Bool = true) -> URL {
         
-        var url: NSURL
+        var url: URL
         
         if (withUser) {
-            url = NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=\(clientID)&response_type=code&state=RANDOM_STRING&redirect_uri=\(redirectURI)&duration=permanent&scope=account,identity,mysubreddits,history,read,save,vote")!
+            url = URL(string: "https://www.reddit.com/api/v1/authorize?client_id=\(clientID)&response_type=code&state=RANDOM_STRING&redirect_uri=\(redirectURI)&duration=permanent&scope=account,identity,mysubreddits,history,read,save,vote")!
         } else {
-            url = NSURL(string: "https://www.reddit.com/api/v1/access_token")!
+            url = URL(string: "https://www.reddit.com/api/v1/access_token")!
         }
         
         return url
@@ -49,20 +49,20 @@ class Authentication {
         Network.requestData(generateRequestNoUser(), callback: assignTokenNoUser)
     }
     
-    static func getTokenFromCode(code: String) {
-        let url = NSURL(string: "https://www.reddit.com/api/v1/access_token")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "Post"
-        request.HTTPBody = "grant_type=authorization_code&code=\(code)&redirect_uri=\(redirectURI)".dataUsingEncoding(NSUTF8StringEncoding)
+    static func getTokenFromCode(_ code: String) {
+        let url = URL(string: "https://www.reddit.com/api/v1/access_token")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "Post"
+        request.httpBody = "grant_type=authorization_code&code=\(code)&redirect_uri=\(redirectURI)".data(using: String.Encoding.utf8)
         let loginString = NSString(format: "%@:%@", clientID, "")
-        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
+        let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        print("Request made to \(request.URL!)")
+        print("Request made to \(request.url!)")
         Network.requestData(request, callback: getToken)
     }
     
-    static func getToken(data: Payload) {
+    static func getToken(_ data: Payload) {
         guard let t = data["access_token"] as? String else {
             return
         }
@@ -76,7 +76,7 @@ class Authentication {
         Page.Front = Page(subreddit: Subreddit.Front)
     }
     
-    static func setToken(token: String) {
+    static func setToken(_ token: String) {
         self.token = token
         getCurrentUser()
     }
@@ -85,12 +85,12 @@ class Authentication {
         Network.apiRequest("api/v1/me", callback: updateCurrentUser)
     }
     
-    private static func updateCurrentUser(data: Payload) {
+    private static func updateCurrentUser(_ data: Payload) {
         currentUser = User(data: data)
         onSuccessfulAuth()
     }
     
-    private static func assignTokenNoUser(json: Payload) {
+    private static func assignTokenNoUser(_ json: Payload) {
         token = json["access_token"] as? String
         print(token!)
     }
@@ -101,13 +101,13 @@ class Authentication {
         let password = ""
         
         let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.init(rawValue: 0))
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
+        let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
         
-        let request = NSMutableURLRequest(URL: getLoginUrl(false))
-        request.HTTPMethod = "POST"
+        let request = NSMutableURLRequest(url: getLoginUrl(false))
+        request.httpMethod = "POST"
         let bodyData = "grant_type=https://oauth.reddit.com/grants/installed_client&device_id=\(deviceID)"
-        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        request.httpBody = bodyData.data(using: String.Encoding.utf8)
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         
         return request

@@ -17,8 +17,8 @@ class Network {
     
     static var timeLeft: Int = 60
     
-    static func requestData(request: NSURLRequest, callback: (data: Payload) -> Void) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    static func requestData(_ request: URLRequest, callback: (data: Payload) -> Void) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         if (requestsLeft == 0) {
             print("Too many requests, sleeping for \(timeLeft)")
@@ -27,12 +27,12 @@ class Network {
         
         var json: Payload?
         
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        let dataTask = session.dataTaskWithRequest(request) {
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let dataTask = session.dataTask(with: request) {
             data, response, error in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 do {
-                    json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? Payload
+                    json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions()) as? Payload
 //                    print(json)
                 } catch {
                     print(error)
@@ -41,12 +41,12 @@ class Network {
                 if let j = json {
                     callback(data: j)
                 }
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             }
             
             if let error = error {
                 print(error.localizedDescription)
-            } else if let res = response as? NSHTTPURLResponse {
+            } else if let res = response as? HTTPURLResponse {
 //                print(res.allHeaderFields)
                 if let left = res.allHeaderFields["x-ratelimit-remaining"] as? String {
                     requestsLeft = Int(Double(left)!)
@@ -62,23 +62,23 @@ class Network {
         dataTask.resume()
     }
     
-    static func requestData(urlString: String, callback: (data: Payload) -> Void) {
-        guard let url = NSURL(string: urlString) else {
+    static func requestData(_ urlString: String, callback: (data: Payload) -> Void) {
+        guard let url = URL(string: urlString) else {
             return
         }
-        let request = NSURLRequest(URL: url)
+        let request = URLRequest(url: url)
         requestData(request, callback: callback)
     }
     
-    static func apiRequest(urlString: String, callback: (data: Payload) -> Void) {
+    static func apiRequest(_ urlString: String, callback: (data: Payload) -> Void) {
         let authURLString = Authentication.authURL + urlString
-        guard let url = NSURL(string: authURLString), let token = Authentication.token else {
+        guard let url = URL(string: authURLString), let token = Authentication.token else {
             print("No auth token or bad api url.")
             return
         }
-        let request = NSMutableURLRequest(URL: url)
+        let request = NSMutableURLRequest(url: url)
         request.addValue("bearer \(token)", forHTTPHeaderField: "Authorization")
-        print("Request made to \(request.URL!)")
+        print("Request made to \(request.url!)")
         requestData(request, callback: callback)
     }
 }

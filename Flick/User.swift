@@ -43,7 +43,7 @@ class User: RedditObject {
         RedditLookup.user(username, callback: self.updateFromJSON)
     }
     
-    override func updateFromJSON(data: Payload) {
+    override func updateFromJSON(_ data: Payload) {
         guard let udata = data["data"] as? Payload, let name = udata["name"] as? String, let link = udata["link_karma"] as? Int, let comment = udata["comment_karma"] as? Int
             else {
                 return

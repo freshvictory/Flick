@@ -22,13 +22,13 @@ class RedditViewController: UIViewController, SFSafariViewControllerDelegate, UI
     var swipeRec = UISwipeGestureRecognizer()
 //    let panRec = UIPanGestureRecognizer()
     
-    @IBAction func loginUser(sender: UIButton) {
-        svc = SFSafariViewController(URL: Authentication.getLoginUrl())
+    @IBAction func loginUser(_ sender: UIButton) {
+        svc = SFSafariViewController(url: Authentication.getLoginUrl() as URL)
         svc!.delegate = self
-        self.presentViewController(svc!, animated: true, completion: nil)
+        self.present(svc!, animated: true, completion: nil)
     }
     
-    @IBAction func refresh(sender: UIButton) {
+    @IBAction func refresh(_ sender: UIButton) {
         responseText.text = Page.Front.posts.first?.title
     }
     
@@ -41,18 +41,18 @@ class RedditViewController: UIViewController, SFSafariViewControllerDelegate, UI
         
         // Gesture Recognizers
         panRec.addTarget(self, action: #selector(RedditViewController.draggedView))
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
         view.addGestureRecognizer(panRec)
         view.addGestureRecognizer(swipeRec)
         panRec.delegate = self
         
         // Authenticate default user
         Authentication.loginNoUser()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RedditViewController.safariLogin(_:)), name: "userLoggedIn", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RedditViewController.safariLogin(_:)), name: "userLoggedIn" as NSNotification.Name, object: nil)
     }
     
-    func safariLogin(notification: NSNotification) {
-        self.svc!.dismissViewControllerAnimated(true, completion: nil)
+    func safariLogin(_ notification: Notification) {
+        self.svc!.dismiss(animated: true, completion: nil)
         refreshDisplay()
     }
     
@@ -68,21 +68,21 @@ class RedditViewController: UIViewController, SFSafariViewControllerDelegate, UI
     // MARK: Gestures
     var performGestures: Bool = true
     
-    func draggedView(sender: UIPanGestureRecognizer) {
-        let translation = sender.velocityInView(self.view)
+    func draggedView(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.velocity(in: self.view)
         print("dragged: \(translation)")
         performGestures = Vector.vertical(translation)
         if performGestures {
-            sender.view?.center = CGPointMake(sender.view!.center.x, sender.view!.center.y + translation.y)
-            sender.setTranslation(CGPointZero, inView: self.view)
+            sender.view?.center = CGPoint(x: sender.view!.center.x, y: sender.view!.center.y + translation.y)
+            sender.setTranslation(CGPoint.zero, in: self.view)
         }
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let gr = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = gr.velocityInView(self.view)
+            let translation = gr.velocity(in: self.view)
             print("gesture: \(translation)")
-            if translation != CGPointZero {
+            if translation != CGPoint.zero {
                 performGestures = Vector.vertical(translation)
             }
         }
@@ -90,8 +90,8 @@ class RedditViewController: UIViewController, SFSafariViewControllerDelegate, UI
     }
 
     // MARK: SFSafariViewControllerDelegate
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

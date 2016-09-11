@@ -22,7 +22,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         dataSource = self
         let firstViewController = redditViewControllers[currentIndex]
         setViewControllers([firstViewController],
-                           direction: .Forward,
+                           direction: .forward,
                            animated: true,
                            completion: nil)
         
@@ -34,7 +34,7 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     
     func createRedditViewController() -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil) .
-            instantiateViewControllerWithIdentifier("redditViewController")
+            instantiateViewController(withIdentifier: "redditViewController")
     }
     
     func createAllViewControllers() {
@@ -47,10 +47,10 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
     
     // MARK: UIPageViewControllerDataSource
     
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print("attempting to scroll left")
-        guard let viewControllerIndex = redditViewControllers.indexOf(viewController) else {
+        guard let viewControllerIndex = redditViewControllers.index(of: viewController) else {
             return nil
         }
         currentIndex = viewControllerIndex
@@ -71,10 +71,10 @@ class PageViewController: UIPageViewController, UIPageViewControllerDataSource, 
         return redditViewControllers[previousIndex]
     }
     
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
         print("attempting to scroll right")
-        guard let viewControllerIndex = redditViewControllers.indexOf(viewController) else {
+        guard let viewControllerIndex = redditViewControllers.index(of: viewController) else {
             return nil
         }
         

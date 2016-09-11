@@ -11,26 +11,26 @@ import CoreGraphics
 
 class Vector {
     
-    static func direction(point: CGPoint) -> Direction {
+    static func direction(_ point: CGPoint) -> Direction {
         if (horizontal(point)) {
-            return point.x < 0 ? Direction.Left : Direction.Right
+            return point.x < 0 ? Direction.left : Direction.right
         } else {
-            return point.y < 0 ? Direction.Down : Direction.Up
+            return point.y < 0 ? Direction.down : Direction.up
         }
     }
     
-    static func vertical(point: CGPoint) -> Bool {
+    static func vertical(_ point: CGPoint) -> Bool {
         return (abs(point.y / point.x) > 1)
     }
     
-    static func horizontal(point: CGPoint) -> Bool {
+    static func horizontal(_ point: CGPoint) -> Bool {
         return !vertical(point)
     }
 }
 
 enum Direction {
-    case Up
-    case Down
-    case Left
-    case Right
+    case up
+    case down
+    case left
+    case right
 }

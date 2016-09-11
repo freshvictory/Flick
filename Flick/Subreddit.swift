@@ -40,7 +40,7 @@ class Subreddit: RedditObject {
         RedditLookup.subreddit(name, callback: self.updateFromJSON)
     }
     
-    override func updateFromJSON(data: Payload) {
+    override func updateFromJSON(_ data: Payload) {
         guard let sdata = data["data"] as? Payload, let t = sdata["title"] as? String, let desc = sdata["description"] as? String, let publicDesc = sdata["public_description"] as? String, let name = sdata["name"] as? String, let numSub = sdata["subscribers"] as? Int, let over = sdata["over18"] as? Int
             else {
                 return
