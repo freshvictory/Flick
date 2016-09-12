@@ -76,7 +76,7 @@ class Network {
             print("No auth token or bad api url.")
             return
         }
-        let request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         request.addValue("bearer \(token)", forHTTPHeaderField: "Authorization")
         print("Request made to \(request.url!)")
         requestData(request, callback: callback)

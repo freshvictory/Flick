@@ -51,7 +51,7 @@ class Authentication {
     
     static func getTokenFromCode(_ code: String) {
         let url = URL(string: "https://www.reddit.com/api/v1/access_token")!
-        let request = NSMutableURLRequest(url: url)
+        var request = URLRequest(url: url)
         request.httpMethod = "Post"
         request.httpBody = "grant_type=authorization_code&code=\(code)&redirect_uri=\(redirectURI)".data(using: String.Encoding.utf8)
         let loginString = NSString(format: "%@:%@", clientID, "")
@@ -95,7 +95,7 @@ class Authentication {
         print(token!)
     }
     
-    private static func generateRequestNoUser() -> NSMutableURLRequest {
+    private static func generateRequestNoUser() -> URLRequest {
         
         let username = clientID
         let password = ""
@@ -104,7 +104,7 @@ class Authentication {
         let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)!
         let base64LoginString = loginData.base64EncodedString(options: NSData.Base64EncodingOptions.init(rawValue: 0))
         
-        let request = NSMutableURLRequest(url: getLoginUrl(false))
+        var request = URLRequest(url: getLoginUrl(false))
         request.httpMethod = "POST"
         let bodyData = "grant_type=https://oauth.reddit.com/grants/installed_client&device_id=\(deviceID)"
         request.httpBody = bodyData.data(using: String.Encoding.utf8)
